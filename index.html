@@ -1,211 +1,163 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Personal resume website" />
-  <title>Your Name — Resume</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="个人简历 - 可部署到 GitHub Pages 的静态网站" />
+  <title>许家辉 — 个人简历</title>
   <style>
-    :root {
-      --bg: #f9fafb;
-      --text: #111827;
-      --subtext: #4b5563;
-      --accent: #2563eb;
-      --card: #fff;
-      --border: #f3f4f6;
+    :root{
+      --bg: #f3f4f6;
+      --card:#ffffff;
+      --text:#0f172a;
+      --muted:#475569;
+      --accent:#2563eb;
+      --border:#e6eef8;
     }
-
-    [data-theme='dark'] {
-      --bg: #0f172a;
-      --text: #f8fafc;
-      --subtext: #cbd5e1;
-      --accent: #60a5fa;
-      --card: #1e293b;
-      --border: #334155;
+    [data-theme='dark']{
+      --bg:#071028;
+      --card:#0b1220;
+      --text:#e6eef8;
+      --muted:#9fb0c8;
+      --accent:#60a5fa;
+      --border:#123048;
     }
-
-    body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      padding: 1.5rem;
-      transition: background 0.3s, color 0.3s;
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family: system-ui,-apple-system, "Segoe UI", Roboto, 'PingFang SC', 'Helvetica Neue', Arial;
+      background:var(--bg); color:var(--text); -webkit-font-smoothing:antialiased;
+      display:flex; align-items:center; justify-content:center; padding:24px;
+      transition:background .25s,color .25s;
     }
-    .container {
-      max-width: 800px;
-      width: 100%;
-      background: var(--card);
-      border-radius: 1rem;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      transition: background 0.3s;
+    .page{
+      width:100%; max-width:1000px; background:var(--card); border-radius:12px; overflow:hidden;
+      box-shadow:0 8px 30px rgba(2,6,23,0.12); display:flex; border:1px solid var(--border);
     }
-    header {
-      padding: 2rem;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      text-align: center;
-    }
-    h1 {
-      font-size: 1.75rem;
-      margin: 0;
-      word-break: break-word;
-    }
-    h2 {
-      font-size: 1.25rem;
-      margin: 1.5rem 0 0.5rem;
-    }
-    p, li {
-      color: var(--subtext);
-      line-height: 1.6;
-    }
-    a {
-      color: var(--accent);
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-    main {
-      padding: 2rem;
-      display: flex;
-      flex-direction: column;
-    }
-    .section {
-      margin-bottom: 2rem;
-    }
-    .skills span {
-      display: inline-block;
-      background: var(--border);
-      color: var(--text);
-      border-radius: 9999px;
-      padding: 0.25rem 0.75rem;
-      font-size: 0.875rem;
-      margin: 0.25rem;
-    }
-    footer {
-      text-align: center;
-      padding: 1rem;
-      background: var(--bg);
-      font-size: 0.875rem;
-      color: var(--subtext);
-      border-top: 1px solid var(--border);
-      transition: background 0.3s;
-    }
-
-    /* Theme Toggle Button */
-    .theme-toggle {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 9999px;
-      padding: 0.5rem 1rem;
-      cursor: pointer;
-      color: var(--text);
-      font-size: 0.875rem;
-      transition: background 0.3s, color 0.3s;
-    }
-    .theme-toggle:hover {
-      background: var(--border);
-    }
-
-    /* Responsive Design */
-    @media (max-width: 768px) {
-      body { padding: 0.75rem; }
-      header { padding: 1.5rem 1rem; }
-      main { padding: 1.5rem 1rem; }
-      h1 { font-size: 1.5rem; }
-      h2 { font-size: 1.125rem; }
-      .skills span { font-size: 0.75rem; padding: 0.25rem 0.5rem; }
-      footer { font-size: 0.75rem; }
-    }
-    @media (max-width: 480px) {
-      header p, p, li { font-size: 0.9rem; }
-    }
+    .aside{width:320px; min-width:240px; padding:28px; background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);}
+    .avatar{width:84px;height:84px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#7c3aed);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:28px}
+    .name{font-size:20px;font-weight:700;margin-top:12px}
+    .title{font-size:13px;color:var(--muted);margin-top:6px}
+    .contact{margin-top:18px;font-size:14px;color:var(--muted)}
+    .contact a{color:var(--accent);text-decoration:none}
+    .section-title{font-size:12px;color:var(--muted);text-transform:uppercase;margin-top:20px;letter-spacing:0.08em}
+    .skills{margin-top:8px}
+    .tag{display:inline-block;background:var(--bg);color:var(--text);border-radius:999px;padding:6px 10px;font-size:13px;margin:6px 6px 0 0;border:1px solid var(--border)}
+    .content{flex:1;padding:28px}
+    .row{display:flex;justify-content:space-between;align-items:flex-start}
+    h2{margin:0;font-size:16px}
+    h3{margin:0;font-size:14px;color:var(--muted)}
+    .item{margin-top:14px}
+    ul{margin:8px 0 0 20px;padding:0;color:var(--muted)}
+    footer{padding:14px 28px;background:transparent;text-align:center;color:var(--muted);font-size:13px;border-top:1px solid var(--border)}
+    .theme-btn{position:absolute;right:28px;top:28px;background:var(--card);border:1px solid var(--border);padding:8px 12px;border-radius:999px;cursor:pointer;color:var(--muted);font-size:13px}
+    .theme-btn:hover{opacity:.9}
+    @media (max-width:900px){.page{flex-direction:column}.aside{width:100%;display:flex;align-items:center;gap:16px}.content{padding:20px}.theme-btn{right:16px;top:16px}}
+    @media (max-width:480px){body{padding:12px}.aside{padding:16px}.content{padding:16px}.avatar{width:64px;height:64px;font-size:22px}.name{font-size:18px}}
   </style>
 </head>
 <body>
-  <button class="theme-toggle" onclick="toggleTheme()">🌙 Dark</button>
-  <div class="container">
-    <header>
-      <h1>Your Name</h1>
-      <p>Product Designer / Frontend Engineer</p>
-      <p>📍 Singapore · <a href="mailto:you@example.com">you@example.com</a></p>
-      <p>
-        <a href="https://github.com/yourgithub">GitHub</a> ·
-        <a href="https://linkedin.com/in/yourlinkedin">LinkedIn</a> ·
-        <a href="resume.pdf" download>Download PDF</a>
-      </p>
-    </header>
-    <main>
-      <section class="section about">
-        <h2>About</h2>
-        <p>I design and build delightful, accessible product experiences. I focus on clean interfaces, strong interactions, and pragmatic engineering.</p>
-      </section>
-      <section class="section skills">
-        <h2>Skills</h2>
-        <div>
-          <span>React</span>
-          <span>TypeScript</span>
-          <span>Tailwind CSS</span>
-          <span>Figma</span>
-          <span>Accessibility</span>
-          <span>Performance</span>
+  <button class="theme-btn" onclick="toggleTheme()">🌙 深色</button>
+  <div class="page">
+    <aside class="aside">
+      <div style="display:flex;flex-direction:column;align-items:flex-start">
+        <div class="avatar">许家辉</div>
+        <div style="margin-left:0">
+          <div class="name">许家辉</div>
+          <div class="title">后端工程师</div>
         </div>
-      </section>
-      <section class="section experience">
-        <h2>Experience</h2>
-        <h3>Senior Frontend Engineer · Acme Corp (2022 — Present)</h3>
-        <ul>
-          <li>Led a design-system migration that reduced bundle size by 18%.</li>
-          <li>Built accessible components used across 10+ products.</li>
-        </ul>
-        <h3>Product Designer · Bright Studio (2019 — 2022)</h3>
-        <ul>
-          <li>Designed a new onboarding flow that increased activation by 24%.</li>
-        </ul>
-      </section>
-      <section class="section projects">
-        <h2>Projects</h2>
-        <p><strong><a href="https://example.com">Portfolio App</a></strong> — A tiny, accessible portfolio built with React and Tailwind.</p>
-      </section>
-      <section class="section education">
-        <h2>Education</h2>
-        <p><strong>National University</strong> — B.Sc. in Computer Science (2015 — 2019)</p>
-      </section>
-      <section class="section contact">
-        <h2>Contact</h2>
-        <p>Like what you see? Reach out via <a href="mailto:you@example.com">email</a> or connect on <a href="https://linkedin.com/in/yourlinkedin">LinkedIn</a>.</p>
-      </section>
+      </div>
+      <div class="contact">
+        <div>📍 深圳</div>
+        <div style="margin-top:8px">✉️ <a href="mailto:zhangsan@example.com">jiahui.x@foxmail.com</a></div>
+        <div style="margin-top:6px">🔗 <a href="https://github.com/zhangsan">github.com/IamJiahuiXu</a></div>
+        <div style="margin-top:6px">🔗 <a href="https://linkedin.com/in/zhangsan">linkedin.com/in/zhangsan</a></div>
+        <div style="margin-top:6px">📄 <a href="resume.pdf" download>下载 PDF</a></div>
+      </div>
+      <div class="section-title">技能</div>
+      <div class="skills">
+        <span class="tag">HTML/CSS</span>
+        <span class="tag">JavaScript</span>
+        <span class="tag">React</span>
+        <span class="tag">TypeScript</span>
+        <span class="tag">Figma</span>
+      </div>
+      <div class="section-title">语言</div>
+      <div style="margin-top:8px;color:var(--muted)">中文（母语） / 英语（流利）</div>
+    </aside>
+
+    <main class="content">
+      <div class="row">
+        <div>
+          <h2>个人简介</h2>
+          <p style="margin-top:8px;color:var(--muted)">具备 5 年前端与产品设计经验，擅长将交互设计与工程高效结合，关注可访问性与性能优化，曾负责多个中大型产品的 UI 与组件库建设。</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="row"><div><h2>工作经历</h2></div></div>
+        <div style="margin-top:10px">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start">
+            <div>
+              <div style="font-weight:600">高级前端工程师 · 星辰科技</div>
+              <div style="color:var(--muted);margin-top:6px">2022 年 6 月 — 现在</div>
+            </div>
+            <div style="color:var(--muted);font-size:13px">新加坡</div>
+          </div>
+          <ul>
+            <li>主导公司设计系统重构，组件复用率提升 40%，首屏性能提升 18%。</li>
+            <li>与产品团队合作，完成多端一致的交互体验与无障碍改造。</li>
+          </ul>
+          <div style="height:12px"></div>
+          <div style="display:flex;justify-content:space-between;align-items:flex-start">
+            <div>
+              <div style="font-weight:600">产品设计师 · 光年工作室</div>
+              <div style="color:var(--muted);margin-top:6px">2019 年 4 月 — 2022 年 5 月</div>
+            </div>
+            <div style="color:var(--muted);font-size:13px">中国 · 深圳</div>
+          </div>
+          <ul>
+            <li>负责用户调研与原型设计，推动上线后用户激活率提升 24%。</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="item">
+        <h2>项目经验</h2>
+        <div style="margin-top:8px;color:var(--muted)">
+          <div style="font-weight:600">可访问性组件库</div>
+          <div style="margin-top:6px">建立一套轻量级、支持暗色主题的组件库，包含按钮、表单、对话框等，已在 10+ 产品中复用。</div>
+        </div>
+      </div>
+
+      <div class="item">
+        <h2>教育背景</h2>
+        <div style="margin-top:8px;color:var(--muted)">
+          <div style="font-weight:600">哈尔滨工业大学（深圳） — 电子信息硕士</div>
+          <div style="margin-top:4px">2025 — 2028 </div>
+        </div>
+        <div style="margin-top:12px;color:var(--muted)">
+          <div style="font-weight:600">中山大学 — 通信工程学士</div>
+          <div style="margin-top:4px">2021 — 2025· GPA：3.97 / 4.0 · 专业排名 5 %</div>
+        </div>
+      </div>
+
+      <div class="item">
+        <h2>自我评价</h2>
+        <p style="margin-top:8px;color:var(--muted)">逻辑严谨、沟通力强、乐于攻坚技术与体验难题，能在跨职能团队中推动落地。</p>
+      </div>
     </main>
-    <footer>
-      © 2025 Your Name — Built with pure HTML & CSS · <a href="https://yourwebsite.com">yourwebsite.com</a>
-    </footer>
   </div>
+
+  <footer>© 2025 许家辉 — 基于纯静态 HTML/CSS，适用于 GitHub Pages</footer>
 
   <script>
     const root = document.documentElement;
-    const button = document.querySelector('.theme-toggle');
-    function toggleTheme() {
-      const isDark = root.getAttribute('data-theme') === 'dark';
-      if (isDark) {
-        root.removeAttribute('data-theme');
-        button.textContent = '🌙 Dark';
-      } else {
-        root.setAttribute('data-theme', 'dark');
-        button.textContent = '☀️ Light';
-      }
+    const btn = document.querySelector('.theme-btn');
+    function toggleTheme(){
+      const dark = root.getAttribute('data-theme') === 'dark';
+      if(dark){ root.removeAttribute('data-theme'); btn.textContent='🌙 深色'; }
+      else{ root.setAttribute('data-theme','dark'); btn.textContent='☀️ 浅色'; }
     }
   </script>
 </body>
